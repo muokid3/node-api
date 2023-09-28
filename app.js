@@ -5,6 +5,7 @@ const path = require("path");
 const multer = require("multer");
 
 const feedRoutes = require("./routes/feed");
+const authRoutes = require("./routes/auth");
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -43,6 +44,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use("/feed", feedRoutes);
+app.use("/auth", authRoutes);
 
 //global error handling
 app.use((error, req, res, next) => {
@@ -50,9 +52,11 @@ app.use((error, req, res, next) => {
 
   const status = error.statusCode || 500;
   const message = error.message;
+  const errors = error.errors;
 
   res.status(status).json({
     message: message,
+    errors: errors
   });
 });
 mongoose

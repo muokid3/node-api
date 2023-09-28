@@ -1,7 +1,7 @@
 const express = require("express");
 const { body } = require("express-validator");
 
-const feedController = require("../controllers/feed");
+const feedController = require("../controllers/feedController");
 
 const router = express.Router();
 
